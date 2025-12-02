@@ -1,0 +1,22 @@
+.h1 {
+  text-align: center;
+  text-transform:uppercase;
+}
+.rectangle {
+  width: 100px;
+  height: 100px;
+  background-color: rgb(255, 0, 174);
+  /* color:blue; */
+  margin-left: 50px;
+  text-align:center;
+  /* padding:10px; */
+  /* font-size:25px; */
+  /* text-transform:uppercase; */
+  /* padding-right: 100px; */
+  border-radius:10px;
+}
+div:hover{
+    background-color: blue;
+    /* color:rgb(255, 0, 174); */
+    border-radius:100px;
+}
