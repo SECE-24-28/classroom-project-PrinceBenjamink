@@ -2,9 +2,18 @@ import React from "react";
 // import Home from "./hello-world/Home";
 // import FormPage from "./hello-world/FormPage";
 // import SquareShape from "./hello-world/Square.jsx";
-import Flex from "./hello-world/Media.jsx";
+// import PositionComponent from "./positioning/Position-Component.jsx";
+// import Flex from "./hello-world/Media.jsx";
+// import ExcellenceComponent from"./excellence/Excellence-Component.jsx";
+import TrustedByComponent from"./trusted-by/Trusted-By-Component.jsx";
 function App() {
-  return <Flex/>;
+  return <div>
+    <TrustedByComponent/>
+    {/* <PositionComponent/> */}
+    {/* <ExcellenceComponent/>
+    <Flex/> */}
+    </div>;
+  // return <Flex/>;
 //   return (
 //   <SquareShape/>
 //  );
