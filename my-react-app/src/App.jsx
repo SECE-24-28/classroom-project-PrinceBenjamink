@@ -1,18 +1,38 @@
 import React from "react";
+import CourseComponent from "./course/course-component.jsx";
+import ImpactComponent from"./impact/Impact-Component.jsx";
+import PromiseComponent from"./promise/Promise-Component.jsx";
+function App() {
+  return (<div>
+  <ImpactComponent/>
+  <PromiseComponent/>
+  <CourseComponent/>
+  </div>);
+}
+
+
+
+
+
+
+
+
+
+
+
 // import Home from "./hello-world/Home";
 // import FormPage from "./hello-world/FormPage";
 // import SquareShape from "./hello-world/Square.jsx";
 // import PositionComponent from "./positioning/Position-Component.jsx";
 // import Flex from "./hello-world/Media.jsx";
 // import ExcellenceComponent from"./excellence/Excellence-Component.jsx";
-import TrustedByComponent from"./trusted-by/Trusted-By-Component.jsx";
-function App() {
-  return <div>
-    <TrustedByComponent/>
+// import TrustedByComponent from"./trusted-by/Trusted-By-Component.jsx";
+  // return <div>
+    // <TrustedByComponent/>
     {/* <PositionComponent/> */}
     {/* <ExcellenceComponent/>
     <Flex/> */}
-    </div>;
+    {/* </div>; */}
   // return <Flex/>;
 //   return (
 //   <SquareShape/>
@@ -32,6 +52,5 @@ function App() {
   //     </Routes>
   //   </Router>
   // );
-}
 
 export default App;
