@@ -1,12 +1,8 @@
 import React from "react";
-import CourseComponent from "./course/course-component.jsx";
-import ImpactComponent from"./impact/Impact-Component.jsx";
-import PromiseComponent from"./promise/Promise-Component.jsx";
+import TrustedByComponent from"./trusted-by/Trusted-By-Component.jsx";
 function App() {
   return (<div>
-  <ImpactComponent/>
-  <PromiseComponent/>
-  <CourseComponent/>
+    <TrustedByComponent/>
   </div>);
 }
 
@@ -19,6 +15,12 @@ function App() {
 
 
 
+// import CourseComponent from "./course/course-component.jsx";
+// import ImpactComponent from"./impact/Impact-Component.jsx";
+// import OurPromisesComponent from"./promise/Promise-Component.jsx";
+{/* <OurPromisesComponent/> */}
+{/* <ImpactComponent/> */}
+{/* <CourseComponent/> */}
 
 // import Home from "./hello-world/Home";
 // import FormPage from "./hello-world/FormPage";
