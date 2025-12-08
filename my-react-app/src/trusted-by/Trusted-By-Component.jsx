@@ -1,15 +1,15 @@
 import React from "react";
 import { TrustedByStyle } from "./trusted-by-style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { TrustedByData } from "./data";
-const TrustedByComponent = () => {
+// import { TrustedByData } from "./data";
+const TrustedByComponent = ({data,size,color}) => {
   return (
-    <TrustedByStyle>
+    <TrustedByStyle size={size} color={color}>
       <div className="heading">
         <h2>Trusted By</h2>
       </div>
       <div className="container">
-        {TrustedByData.map((item, index) => {
+        {data?.map((item, index) => {
           return (
             <div className="box" key={index}>
               <div className="box__content">

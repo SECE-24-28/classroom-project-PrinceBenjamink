@@ -6,8 +6,9 @@ export const TrustedByStyle = styled.div`
   font-family: "Work Sans", sans-serif;
   .heading {
     font-weight: 600;
-    font-size: 35px;
+    font-size: ${props => props.size || "35px"};
     text-align: center;
+    color: ${props => props.color || "red"};
   }
   .container {
     display: flex;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 export const HelloWorldStyle = styled.div`
+.element {
   background-color: black;
-  .element {
     text-align: center;
     color: gold;
     text-transform: uppercase;

@@ -1,6 +1,9 @@
 import React from "react";
 import { ExcellenceStyle } from "./excellence-style.js";
+import { useParams } from "react-router-dom";
 const ExcellenceComponent = () => {
+    const {id} = useParams();
+    console.log("Id : ",id);
     return (
         <ExcellenceStyle>
                         <div class="element">

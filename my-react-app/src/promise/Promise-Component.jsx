@@ -3,9 +3,10 @@ import { OurPromisesStyle } from "./promise-style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { OurpromisesData } from "./data";
 
-const OurPromisesComponent = () => {
+const OurPromisesComponent = ({data}) => {
   return (
     <OurPromisesStyle>
+
       <div className="paras">
         <h1>Our Promise</h1>
         <p>
@@ -14,7 +15,7 @@ const OurPromisesComponent = () => {
         </p>
       </div>
       <div className="parent">
-        {OurpromisesData.map((item, index) => {
+        {data.map((item, index) => {
           return (
             <div
               className="child"
