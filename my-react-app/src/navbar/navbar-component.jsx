@@ -18,8 +18,8 @@ const NavBar = () => {
         <li><Link to="/api-fetch">API</Link></li>
         <li><Link to="/use-effect">Use Effect</Link></li>
         <li><Link to="/sign-up">Sign Up</Link></li>
-        <li><Link to="/use-state-form">Login</Link></li>
         <li><Link to="/position">Positioning</Link></li>
+        <li><Link to="/use-state-form">Login</Link></li>
       </ul>
     </nav>
     </NavbarStyle>
