@@ -1,80 +1,57 @@
 import React, { useState } from "react";
 import { SignupStyle } from "./sign-up-style.js";
-
 const SignUpComponent = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [college, setCollege] = useState("AGH B2C");
-  const [passoutYear, setPassoutYear] = useState("2024");
-  const [department, setDepartment] = useState("CSE");
-  const [ugpg, setUgpg] = useState("UG");
-  const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    college: "sri eshwar",
+    passoutYear: "2024",
+    department: "CSE",
+    ugpg: "UG",
+    email: "",
+    mobile: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(0);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(0);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    switch (name) {
-      case "firstName":
-        setFirstName(value);
-        break;
-      case "lastName":
-        setLastName(value);
-        break;
-      case "email":
-        setEmail(value);
-        break;
-      case "mobile":
-        setMobile(value);
-        break;
-      case "password":
-        setPassword(value);
-        break;
-      case "confirmPassword":
-        setConfirmPassword(value);
-        break;
-      case "college":
-        setCollege(value);
-        break;
-      case "passoutYear":
-        setPassoutYear(value);
-        break;
-      case "department":
-        setDepartment(value);
-        break;
-      case "ugpg":
-        setUgpg(value);
-        break;
-      default:
-        break;
+
+    if (name === "firstName") {
+      setFormData({ ...formData, firstName: value });
+    } else if (name === "lastName") {
+      setFormData({ ...formData, lastName: value });
+    } else if (name === "college") {
+      setFormData({ ...formData, college: value });
+    } else if (name === "passoutYear") {
+      setFormData({ ...formData, passoutYear: value });
+    } else if (name === "department") {
+      setFormData({ ...formData, department: value });
+    } else if (name === "ugpg") {
+      setFormData({ ...formData, ugpg: value });
+    } else if (name === "email") {
+      setFormData({ ...formData, email: value });
+    } else if (name === "mobile") {
+      setFormData({ ...formData, mobile: value });
+    } else if (name === "password") {
+      setFormData({ ...formData, password: value });
+    } else if (name === "confirmPassword") {
+      setFormData({ ...formData, confirmPassword: value });
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-    console.log("College:", college);
-    console.log("Passout Year:", passoutYear);
-    console.log("Department:", department);
-    console.log("UG/PG:", ugpg);
-    console.log("Email:", email);
-    console.log("Mobile:", mobile);
-    console.log("Password:", password);
-    console.log("Confirm Password:", confirmPassword);
+    console.log("Form Data:", formData);
   };
 
   return (
     <SignupStyle>
       <div className="signup-wrapper">
-        <form
-          id="signupForm"
-          className="signup-container"
-          onSubmit={handleSubmit}
-        >
+        <form id="signupForm" className="signup-container" onSubmit={handleSubmit}>
           <h1 className="signup-title">
             <span className="blue">Welcome to</span>
             <br />
@@ -88,7 +65,7 @@ const SignUpComponent = () => {
                 <input
                   type="text"
                   name="firstName"
-                  value={firstName}
+                  value={formData.firstName}
                   onChange={handleChange}
                   placeholder="Enter first name"
                 />
@@ -98,7 +75,7 @@ const SignUpComponent = () => {
                 <input
                   type="text"
                   name="lastName"
-                  value={lastName}
+                  value={formData.lastName}
                   onChange={handleChange}
                   placeholder="Enter last name"
                 />
@@ -109,7 +86,7 @@ const SignUpComponent = () => {
               <div className="row">
                 <div className="input-box two-five-fourth">
                   <label>Select College</label>
-                  <select name="college" value={college} onChange={handleChange}>
+                  <select name="college" value={formData.college} onChange={handleChange}>
                     <option value="AGH B2C">AGH B2C</option>
                     <option value="XYZ College">XYZ College</option>
                     <option value="ABC Institute">ABC Institute</option>
@@ -119,7 +96,7 @@ const SignUpComponent = () => {
                   <label>Select Passout Year</label>
                   <select
                     name="passoutYear"
-                    value={passoutYear}
+                    value={formData.passoutYear}
                     onChange={handleChange}
                   >
                     <option value="2024">2024</option>
@@ -133,7 +110,7 @@ const SignUpComponent = () => {
                   <label>Department</label>
                   <select
                     name="department"
-                    value={department}
+                    value={formData.department}
                     onChange={handleChange}
                   >
                     <option value="CSE">CSE</option>
@@ -143,7 +120,7 @@ const SignUpComponent = () => {
                 </div>
                 <div className="input-box one-five-fourth">
                   <label>UG or PG</label>
-                  <select name="ugpg" value={ugpg} onChange={handleChange}>
+                  <select name="ugpg" value={formData.ugpg} onChange={handleChange}>
                     <option value="UG">UG</option>
                     <option value="PG">PG</option>
                   </select>
@@ -157,7 +134,7 @@ const SignUpComponent = () => {
                 <input
                   type="email"
                   name="email"
-                  value={email}
+                  value={formData.email}
                   onChange={handleChange}
                   placeholder="Enter email"
                 />
@@ -171,7 +148,7 @@ const SignUpComponent = () => {
                   <input
                     type="text"
                     name="mobile"
-                    value={mobile}
+                    value={formData.mobile}
                     onChange={handleChange}
                     placeholder="Enter mobile number"
                   />
@@ -194,7 +171,7 @@ const SignUpComponent = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
-                    value={password}
+                    value={formData.password}
                     onChange={handleChange}
                     placeholder="Enter the password"
                   />
@@ -222,7 +199,7 @@ const SignUpComponent = () => {
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
-                    value={confirmPassword}
+                    value={formData.confirmPassword}
                     onChange={handleChange}
                     placeholder="Enter confirm password"
                   />

@@ -14,6 +14,10 @@ import UseStateComponent from "./useState/use-state-component.jsx";
 import UsestateformComponent from "./form/form-component.jsx";
 import AdditionOperationComponent from "./addition-operation-in-state/addition-operation-in-state.jsx";
 import SignUpComponent from "./sign-up-form/sign-up-component.jsx";
+import FetchApiComponent from "./api-fetch/fetch-api-component.jsx";
+import UseEffectComponent from "./use-effect-practice/use-effect-practice.jsx";
+import UseEffectPracticeTwo from "./use-effect-practice/use-effect-practice-2.jsx";
+import UseEffectApi from "./use-effect-practice/use-effect-api.jsx";
 function App() {
   return (
     <div>
@@ -21,13 +25,17 @@ function App() {
         <Route path="/promise" element={<><NavBar/><PromiseComponent data={OurpromisesData}/></>} />
         <Route path="/trusted" element={<><NavBar/><TrustedByComponent data={TrustedByData} color="black" size="50px"/></>} />
         <Route path="/position" element={<><NavBar/><PositionComponent/></>} />
-        <Route path="/hello" element={<><NavBar/><HelloWorldComponent/></>} />
+        <Route path="/" element={<><NavBar/><HelloWorldComponent/></>} />
         <Route path="/impact" element={<><NavBar/><ImpactComponent/></>} />
         <Route path="/excellence/:id" element={<><NavBar/><ExcellenceComponent/></>} />
         <Route path="/user-state" element={<><NavBar/><UseStateComponent /></>} />
         <Route path="/use-state-form" element={<><NavBar/><UsestateformComponent/></>} />
         <Route path="/addition-operation-in-state" element={<><NavBar/><AdditionOperationComponent/></>}/>
         <Route path="/sign-up" element={<><NavBar/><SignUpComponent/></>}/>
+        {/* <Route path="/use-effect" element={<><NavBar/><UseEffectComponent/><UseEffectPracticeTwo/></>}/> */}
+        {/* <Route path="/use-effect" element={<><NavBar/><UseEffectPracticeTwo/></>}/> */}
+        <Route path="/use-effect" element={<><NavBar/><UseEffectApi/></>}/>
+        <Route path="/api-fetch" element={<><NavBar/><FetchApiComponent/></>}/>
         <Route path="*" element={<><NavBar/><NotFoundComponent/></>}/>
       </Routes>
     </div>
