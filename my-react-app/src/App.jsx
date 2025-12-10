@@ -18,12 +18,13 @@ import FetchApiComponent from "./api-fetch/fetch-api-component.jsx";
 import UseEffectComponent from "./use-effect-practice/use-effect-practice.jsx";
 import UseEffectPracticeTwo from "./use-effect-practice/use-effect-practice-2.jsx";
 import UseEffectApi from "./use-effect-practice/use-effect-api.jsx";
+import CourseComponent from "./course/course-component.jsx";
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/promise" element={<><NavBar/><PromiseComponent data={OurpromisesData}/></>} />
-        <Route path="/trusted" element={<><NavBar/><TrustedByComponent data={TrustedByData} color="black" size="50px"/></>} />
+        <Route path="/promise" element={<><PromiseComponent data={OurpromisesData}/></>} />
+        <Route path="/trusted" element={<><TrustedByComponent data={TrustedByData} color="black" size="50px"/></>} />
         <Route path="/position" element={<><NavBar/><PositionComponent/></>} />
         <Route path="/" element={<><NavBar/><HelloWorldComponent/></>} />
         <Route path="/impact" element={<><NavBar/><ImpactComponent/></>} />
@@ -36,6 +37,7 @@ function App() {
         {/* <Route path="/use-effect" element={<><NavBar/><UseEffectPracticeTwo/></>}/> */}
         <Route path="/use-effect" element={<><NavBar/><UseEffectApi/></>}/>
         <Route path="/api-fetch" element={<><NavBar/><FetchApiComponent/></>}/>
+        <Route path="/course" element={<><NavBar/><CourseComponent/></>}/>
         <Route path="*" element={<><NavBar/><NotFoundComponent/></>}/>
       </Routes>
     </div>
