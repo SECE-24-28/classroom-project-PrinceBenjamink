@@ -19,6 +19,11 @@ import UseEffectComponent from "./use-effect-practice/use-effect-practice.jsx";
 import UseEffectPracticeTwo from "./use-effect-practice/use-effect-practice-2.jsx";
 import UseEffectApi from "./use-effect-practice/use-effect-api.jsx";
 import CourseComponent from "./course/course-component.jsx";
+import SignupFormComponent from "./signup-form-api/signup-form-component.jsx";
+import UserFetchViaEmail from "./user-fetch-via-email/user-fetch-via-email.jsx";
+import AdminSignUpComponent from "./admin-signup/admin-sign-up.jsx";
+
+
 function App() {
   return (
     <div>
@@ -38,6 +43,9 @@ function App() {
         <Route path="/use-effect" element={<><NavBar/><UseEffectApi/></>}/>
         <Route path="/api-fetch" element={<><NavBar/><FetchApiComponent/></>}/>
         <Route path="/course" element={<><NavBar/><CourseComponent/></>}/>
+        <Route path="/signupform" element={<><SignupFormComponent/></>}/>
+        <Route path="/finduserbyemail" element={<UserFetchViaEmail/>}/>
+        <Route path="/admin-signup" element={<><AdminSignUpComponent/></>}/>
         <Route path="*" element={<><NavBar/><NotFoundComponent/></>}/>
       </Routes>
     </div>

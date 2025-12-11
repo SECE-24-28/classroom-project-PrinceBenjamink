@@ -8,6 +8,7 @@ database.connect();
 app.use(cors());
 app.use(express.json());
 app.use("/api/v1/User", BasicRoutes);
+app.use("/api/v1/Admin", BasicRoutes);
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
