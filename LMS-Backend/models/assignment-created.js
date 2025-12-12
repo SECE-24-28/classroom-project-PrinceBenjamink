@@ -8,10 +8,10 @@ const AssignmentCreated = new mongoose.Schema({
     type: Date,
     require: true,
   },
-  users: {
+  assignmentCompleted: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    require:true
+    ref: "AssignmentCompleted",
+    require: true,
   },
 });
 module.exports = mongoose.model("AssignmentCreated", AssignmentCreated);
