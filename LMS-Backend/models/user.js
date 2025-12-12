@@ -28,9 +28,9 @@ const User = new mongoose.Schema({
     type: String,
     require: true,
   },
-  setOfAssignmentsAssigned: {
+  setOfAssignmentsAssigned: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "AssignmentCreated",
-  },
+  }],
 });
 module.exports = mongoose.model("User", User);

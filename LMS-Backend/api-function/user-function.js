@@ -1,3 +1,5 @@
+const User = require("../models/user");
+const Admin = require("../models/admin");
 exports.createUser = async (req, res) => {
   try {
     const {
@@ -25,7 +27,7 @@ exports.createUser = async (req, res) => {
       email,
       mobileNumber,
       collegeName,
-      active: false,
+      active,
       password,
     });
 
@@ -44,38 +46,29 @@ exports.createUser = async (req, res) => {
     });
   }
 };
-exports.adminSignup = async (req, res) => {
+
+exports.getAllUsers = async (req, res) => {
   try {
-    const {
-      firstName,
-      secondName,
-      email,
-      mobileNumber,
-      collegeName,
-      password,
-    } = req.body;
-    const [checkDetails, checkUserDetails, checkCollege] = await Promise.all([
-      Admin.findOne({ mobileNumber, email }),
-      User.findOne({ mobileNumber, email }),
-      Admin.findOne({ collegeName }),
-    ]);
-    if (checkDetails || checkUserDetails || checkCollege) {
-      return res.status(400).json({
-        success: false,
-        message: "Admin already exists",
-      });
-    }
-    const createAdmin = await Admin.create({
-      firstName,
-      secondName,
-      email,
-      mobileNumber,
-      collegeName,
-      password,
-    });
+    const allUsers = await User.find({});
     return res.status(200).json({
       success: true,
-      message: "Admin is created",
+      data: allUsers,
+    });
+  } catch (e) {
+    res.status(404).json({
+      success: false,
+      error: e,
+    });
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const deletedUser = await User.findByIdAndDelete(userId);
+    return res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
     });
   } catch (e) {
     res.status(404).json({
