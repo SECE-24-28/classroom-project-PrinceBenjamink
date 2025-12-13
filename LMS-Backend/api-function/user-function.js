@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const Admin = require("../models/admin");
 const AssignmentCompleted = require("../models/assignment-completed");
+const AssignmentCreated = require("../models/assignment-created");
 exports.createUser = async (req, res) => {
   try {
     const {
@@ -50,29 +51,50 @@ exports.createUser = async (req, res) => {
 
 exports.completeAssignment = async (req, res) => {
   try {
-    const { userId, assignmentId, completedTime } = req.body;
+    const { userId, assignmentId } = req.body;
 
-    const now = new Date();
-    if (new Date(completedTime) > now) {
-      return res.status(400).json({
+    const assignmentDetails = await AssignmentCreated.findById(assignmentId);
+    if (!assignmentDetails) {
+      return res.status(404).json({
         success: false,
-        message: "Completed time cannot be in the future",
+        message: "Assignment not found",
       });
     }
 
-    await AssignmentCompleted.create({
+    if (new Date() > new Date(assignmentDetails.deadline)) {
+      return res.status(400).json({
+        success: false,
+        message: "Deadline crossed. Submission not allowed",
+      });
+    }
+
+    const alreadySubmitted = await AssignmentCompleted.findOne({
       user: userId,
       assignment: assignmentId,
-      completedTime: completedTime,
     });
-    await User.findByIdAndUpdate(
-      userId,
-      { $pull: { setOfAssignmentsAssigned: assignmentId } },
+
+    if (alreadySubmitted) {
+      return res.status(400).json({
+        success: false,
+        message: "You have already submitted this test",
+      });
+    }
+
+    const completeAssignment = await AssignmentCompleted.create({
+      user: userId,
+      assignment: assignmentId,
+      submittedAt: new Date(),
+    });
+
+    await AssignmentCreated.findByIdAndUpdate(
+      assignmentId,
+      { $push: { assignmentCompleted: completeAssignment._id } },
       { new: true }
     );
+
     return res.status(200).json({
       success: true,
-      message: "Assignment marked as completed",
+      message: "Test submitted successfully",
     });
   } catch (e) {
     return res.status(500).json({

@@ -8,10 +8,10 @@ const AssignmentCreated = new mongoose.Schema({
     type: Date,
     require: true,
   },
-  assignmentCompleted: {
+  assignmentCompleted:[ {
     type: mongoose.Schema.Types.ObjectId,
     ref: "AssignmentCompleted",
     require: true,
-  },
+  }],
 });
 module.exports = mongoose.model("AssignmentCreated", AssignmentCreated);

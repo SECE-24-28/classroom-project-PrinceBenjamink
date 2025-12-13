@@ -12,10 +12,10 @@ const AssignmentCompleted = new mongoose.Schema({
     ref: "User",
     require: true,
   },
-  assignment: {
+  assignment: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "AssignmentCreated",
     require: true,
-  },
+  }],
 });
 module.exports = mongoose.model("AssignmentCompleted", AssignmentCompleted);
