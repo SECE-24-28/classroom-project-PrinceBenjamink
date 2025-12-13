@@ -137,7 +137,7 @@ exports.getAllAssignments = async (req, res) => {
 
 exports.deactivateUser = async (req, res) => {
   try {
-    const { adminId,userId } = req.body;
+    const { adminId,userId,decision } = req.body;
     const adminDetails = await Admin.findById(adminId);
     if(adminDetails.collegeName!== (await User.findById(userId)).collegeName){
       return res.status(403).json({
@@ -145,11 +145,20 @@ exports.deactivateUser = async (req, res) => {
         message: "You are not authorized to deactivate this user",
       });
     }
+    if(decision==="deactivate"){
     await User.findByIdAndUpdate(userId, { active: false },{ new: true });
     return res.status(200).json({
       success: true,
       message: "User is deactivated successfully",
     });
+  }
+    else{
+      await User.findByIdAndUpdate(userId, { active: true },{ new: true });
+      return res.status(200).json({
+        success: true,
+        message: "User is activated successfully",
+      });
+    }
   } catch (e) {
       return res.status(404).json({
         success: false,

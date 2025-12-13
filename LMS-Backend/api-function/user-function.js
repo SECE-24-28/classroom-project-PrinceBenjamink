@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const Admin = require("../models/admin");
-
+const AssignmentCompleted = require("../models/assignment-completed");
 exports.createUser = async (req, res) => {
   try {
     const {
@@ -28,7 +28,7 @@ exports.createUser = async (req, res) => {
       email,
       mobileNumber,
       collegeName,
-      active:false,
+      active: false,
       password,
     });
 
@@ -48,19 +48,36 @@ exports.createUser = async (req, res) => {
   }
 };
 
+exports.completeAssignment = async (req, res) => {
+  try {
+    const { userId, assignmentId, completedTime } = req.body;
 
-// exports.deleteUser = async (req, res) => {
-//   try {
-//     const { userId } = req.params;
-//     const deletedUser = await User.findByIdAndDelete(userId);
-//     return res.status(200).json({
-//       success: true,
-//       message: "User deleted successfully",
-//     });
-//   } catch (e) {
-//     res.status(404).json({
-//       success: false,
-//       error: e,
-//     });
-//   }
-// };
+    const now = new Date();
+    if (new Date(completedTime) > now) {
+      return res.status(400).json({
+        success: false,
+        message: "Completed time cannot be in the future",
+      });
+    }
+
+    await AssignmentCompleted.create({
+      user: userId,
+      assignment: assignmentId,
+      completedTime: completedTime,
+    });
+    await User.findByIdAndUpdate(
+      userId,
+      { $pull: { setOfAssignmentsAssigned: assignmentId } },
+      { new: true }
+    );
+    return res.status(200).json({
+      success: true,
+      message: "Assignment marked as completed",
+    });
+  } catch (e) {
+    return res.status(500).json({
+      success: false,
+      error: e.message,
+    });
+  }
+};
