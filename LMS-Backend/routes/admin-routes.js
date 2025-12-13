@@ -6,6 +6,7 @@ const {
   createAssignment,
   getAllAssignments,
   deactivateUser,
+  fetchResult,
   
 } = require("../api-function/admin-function");
 const router = express.Router();
@@ -15,7 +16,7 @@ router.post("/acceptOrDecline",acceptOrDecline);
 router.post("/createAssignment",createAssignment);
 router.get("/getAllAssignments/:id",getAllAssignments);
 router.put("/deactivateUser",deactivateUser);
-
+router.get("/fetchResult",fetchResult);
 
 
 
