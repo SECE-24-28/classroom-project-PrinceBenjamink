@@ -1,5 +1,7 @@
 const Admin = require("../models/admin");
 const User = require("../models/user");
+const AssignmentCreated = require("../models/assignment-created");
+
 exports.getAllRequests = async (req, res) => {
   try {
     const { id } = req.params;
@@ -15,7 +17,6 @@ exports.getAllRequests = async (req, res) => {
     });
   }
 };
-
 
 exports.adminSignup = async (req, res) => {
   try {
@@ -57,3 +58,103 @@ exports.adminSignup = async (req, res) => {
     });
   }
 };
+
+exports.acceptOrDecline = async (req, res) => {
+  try {
+    const { adminId, userId, select } = req.body;
+    if (select === 1) {
+      await User.findByIdAndUpdate(userId, { active: true },{ new: true });
+    }
+    await Admin.findByIdAndUpdate(
+      adminId,
+      { $pull: { listOfRequest: userId } },
+      { new: true }
+    );
+    return res.status(200).json({
+      success: true,
+      message: "Process is done successfully",
+    });
+  } catch (e) {
+      return res.status(404).json({
+        success: false,
+        error: e,
+      });
+  }
+};
+
+exports.createAssignment = async (req, res) => {
+  try {
+    const { assignmentName, deadline, adminId } = req.body;
+    const now = new Date();
+    if (new Date(deadline) < now) {
+      return res.status(400).json({
+        success: false,
+        message: "Deadline must be a future date",
+      });
+    }
+    const createAssignment = await AssignmentCreated.create({
+      assignmentName,
+      deadline,
+    });
+    const adminDetails = await Admin.findByIdAndUpdate(
+      adminId,
+      { $push: { listOfAssignments: createAssignment._id } },
+      { new: true }
+    );
+    await User.updateMany(
+      { collegeName: adminDetails.collegeName },
+      { $push: { setOfAssignmentsAssigned: createAssignment._id } }
+    );
+    return res.status(200).json({
+      success: true,
+      message: "Assignment is created successfully",
+    });
+  } catch (e) {
+    return res.status(500).json({
+      success: false,
+      error: e.message,
+    });
+  }
+};
+
+exports.getAllAssignments = async (req, res) => {
+  try {
+    const {id} = req.params;
+    console.log(id);
+    const userDetails = await User.findById(id).populate("setOfAssignmentsAssigned");
+    return res.status(200).json({
+      success: true,
+      data: userDetails.setOfAssignmentsAssigned,
+    });
+  } catch (e) {
+    return res.status(500).json({
+      success: false,
+      error: e.message,
+    });
+  }
+};
+
+
+exports.deactivateUser = async (req, res) => {
+  try {
+    const { adminId,userId } = req.body;
+    const adminDetails = await Admin.findById(adminId);
+    if(adminDetails.collegeName!== (await User.findById(userId)).collegeName){
+      return res.status(403).json({
+        success: false,
+        message: "You are not authorized to deactivate this user",
+      });
+    }
+    await User.findByIdAndUpdate(userId, { active: false },{ new: true });
+    return res.status(200).json({
+      success: true,
+      message: "User is deactivated successfully",
+    });
+  } catch (e) {
+      return res.status(404).json({
+        success: false,
+        error: e,
+      });
+  }
+};
+

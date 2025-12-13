@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const Admin = require("../models/admin");
+
 exports.createUser = async (req, res) => {
   try {
     const {
@@ -18,7 +19,7 @@ exports.createUser = async (req, res) => {
     if (checkDetails || checkAdminDetails) {
       return res.status(400).json({
         success: false,
-        message: "User already exists",
+        message: "Email/Mobile Number already exists",
       });
     }
     const userDetails = await User.create({
@@ -27,7 +28,7 @@ exports.createUser = async (req, res) => {
       email,
       mobileNumber,
       collegeName,
-      active,
+      active:false,
       password,
     });
 
@@ -47,33 +48,19 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.getAllUsers = async (req, res) => {
-  try {
-    const allUsers = await User.find({});
-    return res.status(200).json({
-      success: true,
-      data: allUsers,
-    });
-  } catch (e) {
-    res.status(404).json({
-      success: false,
-      error: e,
-    });
-  }
-};
 
-exports.deleteUser = async (req, res) => {
-  try {
-    const { userId } = req.params;
-    const deletedUser = await User.findByIdAndDelete(userId);
-    return res.status(200).json({
-      success: true,
-      message: "User deleted successfully",
-    });
-  } catch (e) {
-    res.status(404).json({
-      success: false,
-      error: e,
-    });
-  }
-};
+// exports.deleteUser = async (req, res) => {
+//   try {
+//     const { userId } = req.params;
+//     const deletedUser = await User.findByIdAndDelete(userId);
+//     return res.status(200).json({
+//       success: true,
+//       message: "User deleted successfully",
+//     });
+//   } catch (e) {
+//     res.status(404).json({
+//       success: false,
+//       error: e,
+//     });
+//   }
+// };
